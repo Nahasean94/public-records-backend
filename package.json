@@ -1,5 +1,5 @@
 {
-  "name": "cases-filing-processing-system-backend",
+  "name": "public-records-backend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

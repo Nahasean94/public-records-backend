@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Security Guard.iml" filepath="$PROJECT_DIR$/.idea/Security Guard.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/case-filing-processin-system-backend.iml" filepath="$PROJECT_DIR$/.idea/case-filing-processin-system-backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/public-records-backend.iml" filepath="$PROJECT_DIR$/.idea/public-records-backend.iml" />
     </modules>
   </component>
 </project>

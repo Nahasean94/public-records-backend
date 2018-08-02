@@ -17,15 +17,64 @@ const StudentType = new GraphQLObjectType({
         education: {type: GraphQLString},
     })
 })
+const SecondarySchoolType = new GraphQLObjectType({
+    name: 'SecondarySchool',
+    fields: () => ({
+        id: {type: GraphQLID},
+            upi: {type: GraphQLString},
+            math: {type: GraphQLInt},
+            english: {type: GraphQLInt},
+            kiswahili: {type: GraphQLInt},
+            chemistry: {type: GraphQLInt},
+            biology: {type: GraphQLInt},
+            physics: {type: GraphQLInt},
+            geography: {type: GraphQLInt},
+            history: {type: GraphQLInt},
+            religion: {type: GraphQLInt},
+            business: {type: GraphQLInt},
+            year: {type: GraphQLString},
+
+    })
+})
+const PrimarySchoolType = new GraphQLObjectType({
+    name: 'PrimarySchool',
+    fields: () => ({
+        id: {type: GraphQLID},
+            upi: {type: GraphQLString},
+            math: {type: GraphQLInt},
+            english: {type: GraphQLInt},
+            kiswahili: {type: GraphQLInt},
+            chemistry: {type: GraphQLInt},
+            biology: {type: GraphQLInt},
+            physics: {type: GraphQLInt},
+            geography: {type: GraphQLInt},
+            history: {type: GraphQLInt},
+            religion: {type: GraphQLInt},
+            business: {type: GraphQLInt},
+            year: {type: GraphQLString},
+    })
+})
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
         students: {
-            type: StudentType,
-            args: {education: {type: GraphQLID}},
+            type: new GraphQLList(StudentType),
+            args: {education: {type: GraphQLString}},
             resolve(parent, args) {
                 return queries.findStudent(args.education)
+            }
+        },
+        getSecondarySchoolRecords: {
+            type: SecondarySchoolType,
+            async resolve(parent, args, ctx) {
+                return await queries.getSecondarySchoolRecords(args)
+            }
+        },
+        getPrimarySchoolRecords: {
+            type: PrimarySchoolType,
+            async resolve(parent, args, ctx) {
+                return await queries.getPrimarySchoolRecords(args)
             }
         },
     }
@@ -39,11 +88,47 @@ const Mutation = new GraphQLObjectType({
                 upi: {type: GraphQLString},
                 education: {type: GraphQLString},
             },
-            async resolve(parent, args, ctx)
-            {
+            async resolve(parent, args, ctx) {
                 return await queries.addStudent(args)
             }
         },
+        addSecondarySchoolRecord: {
+            type: SecondarySchoolType,
+            args: {
+                upi: {type: GraphQLString},
+                math: {type: GraphQLInt},
+                english: {type: GraphQLInt},
+                kiswahili: {type: GraphQLInt},
+                chemistry: {type: GraphQLInt},
+                biology: {type: GraphQLInt},
+                physics: {type: GraphQLInt},
+                geography: {type: GraphQLInt},
+                history: {type: GraphQLInt},
+                religion: {type: GraphQLInt},
+                business: {type: GraphQLInt},
+                year: {type: GraphQLString},
+            },
+            async resolve(parent, args, ctx) {
+                return await queries.addSecondarySchoolRecord(args)
+            }
+        },
+        addPrimarySchoolRecord: {
+            type: PrimarySchoolType,
+            args: {
+                upi: {type: GraphQLString},
+                math: {type: GraphQLInt},
+                english: {type: GraphQLInt},
+                kiswahili: {type: GraphQLInt},
+                science: {type: GraphQLInt},
+                social_studies: {type: GraphQLInt},
+                year: {type: GraphQLString},
+            },
+            async resolve(parent, args, ctx) {
+                return await queries.addPrimarySchoolRecord(args)
+            }
+        },
+
+
 
     },
 

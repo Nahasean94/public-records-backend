@@ -29,11 +29,53 @@ const StudentSchema = new Schema({
     },
     education: {
         type: String,
-        enum: ['primary','secondary'],
+        enum: ['primary', 'secondary'],
         required: [true, 'Education is required']
     },
 })
+const InstitutionSchema = new Schema({
+    upi: {
+        type: String,
+        unique: true,
+        required: [true, 'UPI is a required field']
+    },
+    name: {
+        type: String,
+        required: [true, 'Name is required']
+    },
+})
+const SecondarySchoolSchema = new Schema({
+    upi: {
+        type: String,
+        unique: true,
+        required: [true, 'UPI is a required field']
+    },
+    math: Number,
+    kiswahili: Number,
+    english: Number,
+    chemistry: Number,
+    biology: Number,
+    physics: Number,
+    religion: Number,
+    history: Number,
+    geography: Number,
+    business: Number,
+    year: String,
+})
+const PrimarySchoolSchema = new Schema({
+    upi: {
+        type: String,
+        unique: true,
+        required: [true, 'UPI is a required field']
+    },
+    math: Number,
+    kiswahili: Number,
+    english: Number,
+    science: Number,
+    social_studies: Number,
+    year: String,
 
+})
 
 
 /**
@@ -41,7 +83,13 @@ const StudentSchema = new Schema({
  * Create models from the above schemas.
  */
 const Student = mongoose.model('Student', StudentSchema)
+const PrimarySchool = mongoose.model('PrimarySchool', PrimarySchoolSchema)
+const SecondarySchool = mongoose.model('SecondarySchool', SecondarySchoolSchema)
+const Institution = mongoose.model('Institution', InstitutionSchema)
 //export the above models to used in other files
 module.exports = {
-   Student
+    Student,
+    PrimarySchool,
+    SecondarySchool,
+    Institution
 }
